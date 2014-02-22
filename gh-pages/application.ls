@@ -53,18 +53,29 @@ angular.module 'demo' <[ checklist-model ]>
     const tai-data = [['Time'] ++ query.plants.map -> "#{ it.name }##{ it.powerset }"]
 
     data.forEach !->
-      aec-data.push [it.t] ++ it.powersets.map (.aec)
-      tai-data.push [it.t] ++ it.powersets.map (.tai)
+      time = new Date 1970,0,0,0,0,0
+        ..setSeconds it.t
+      time = time.toString!
+      aec-data.push [time] ++ it.powersets.map (.aec)
+      tai-data.push [time] ++ it.powersets.map (.tai)
+
+    const vAxis = do
+      maxValue: 675
+      minValue: 600
 
     new gvis.LineChart document.getElementById 'aec-chart'
       ..draw gvis.arrayToDataTable(aec-data), do
         title: '原能會'
+        legend:
+          position: 'none'
         hAxis:
           direction: -1
+        vAxis: vAxis
 
     new gvis.LineChart document.getElementById 'tai-chart'
       ..draw gvis.arrayToDataTable(tai-data), do
         title: '台電'
+        vAxis: vAxis
 
 
   LineChartFormCtrl.$inject = <[ $scope  $q  API  GChart ]>
