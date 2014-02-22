@@ -6,6 +6,12 @@ How to run?
 
 Install nodejs
     $ brew install node
+    $ npm install bower -g
+
+Install dependencies
+
+    $ npm install
+    & bower install
 
 Run the following command:
     
