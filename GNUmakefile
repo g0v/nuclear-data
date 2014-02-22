@@ -41,7 +41,7 @@ distclean: clean
 
 .PHONY: shell
 shell: runtime
-	( source $(RUNTIME_DIR)/bin/activate; python; deactivate; );
+	( . $(RUNTIME_DIR)/bin/activate; python; deactivate; );
 
 .PHONY: runtime
 runtime: $(RUNTIME_DIR)/bin/python
@@ -62,7 +62,7 @@ $(CACHE_DIR)/virtualenv-$(VIRTUALENV_VERSION).tar.gz:
 	https://pypi.python.org/packages/source/v/virtualenv/virtualenv-$(VIRTUALENV_VERSION).tar.gz; );
 
 python-%: $(RUNTIME_DIR)/bin/python
-	( cd $(RUNTIME_DIR); source bin/activate; \
+	( . $(RUNTIME_DIR)/bin/activate; \
 	  pip install --download-cache $(CACHE_DIR)/pip \
 	  $(patsubst python-%,%,$@); deactivate; );
 
@@ -80,7 +80,7 @@ nuclear-init:
 
 .PHONY: run
 run: nuclear-runtime
-	( source $(RUNTIME_DIR)/bin/activate; \
+	( . $(RUNTIME_DIR)/bin/activate; \
 	  python nuclear-server.py; deactivate; );
 
 
