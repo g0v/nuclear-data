@@ -15,25 +15,19 @@ angular.module 'demo' <[ checklist-model ]>
 .factory 'API', <[
        $http  $q 
 ]> ++ ($http, $q) ->
-  const mock = { 'data': [ {'t': 1393082562, 'powersets': [
-    {'planet': '\u6838\u4e00', 'aec': 656.0, 'capacity': 636.0, 'powerset': '1', 'tai': 627.5}, {'planet': '\u6838\u4e00', 'aec': 636.0, 'capacity': 636.0, 'powerset': '2', 'tai': 597.7}, {'planet': '\u6838\u4e8c', 'aec': 1028.0, 'capacity': 985.0, 'powerset': '1', 'tai': 993.3}, {'planet': '\u6838\u4e8c', 'aec': 693.0, 'capacity': 985.0, 'powerset': '2', 'tai': 664.9}, {'planet': '\u6838\u4e09', 'aec': 980.0, 'capacity': 951.0, 'powerset': '1', 'tai': 941.5}, {'planet': '\u6838\u4e09', 'aec': 976.0, 'capacity': 951.0, 'powerset': '2', 'tai': 938.1}]}, ... ] }
 
   intervalData: (query) ->
     query = angular.copy query || {}
-    # $http(
-    #   url: ''
-    #   method: 'get'
-    #   cache: true
-    # ).then (response) ->
-    #   console.log response
-
-    $q.when data: mock .then ({data}) ->
-      angular.copy data .data.map ->
-        it.powersets.= filter (powerset) ->
-          const [plant] = query.plants.filter -> it.name is powerset.planet and it.powerset is powerset.powerset
-          !!plant
-          
-        it
+    $http(
+      url: "/api/tai-vs-aec/#{ query.startAt }/#{ query.endAt }"
+      method: 'get'
+      cache: true
+    ).then ({data}) ->
+      <- data.data.map 
+      it.powersets.= filter (powerset) ->
+        const [plant] = query.plants.filter -> it.name is powerset.planet and it.powerset is powerset.powerset
+        !!plant
+      it
 
 
 .controller 'LineChartFormCtrl' do ->
@@ -76,7 +70,10 @@ angular.module 'demo' <[ checklist-model ]>
   LineChartFormCtrl.$inject = <[ $scope  $q  API  GChart ]>
 
   !function LineChartFormCtrl ($scope, $q, API, GChart)
-    $scope.query = plants: []
+    $scope.query = do
+      plants: @plants[0 til 2]
+      startAt: 0
+      endAt: Date.now!
 
     $scope.$watch 'query' !~>
       $q.all [
