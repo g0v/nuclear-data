@@ -1,0 +1,49 @@
+{
+  "name": "ng-fire-alarm",
+  "version": "0.4.2",
+  "authors": [
+    "tomchentw <developer@tomchentw.com>"
+  ],
+  "description": "Firebase binding use $q in AngularJS",
+  "main": "ng-fire-alarm.js",
+  "keywords": [
+    "Firebase",
+    "AngularJS",
+    "two-way binding",
+    "deferred",
+    "notify",
+    "promise"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tomchentw/ng-fire-alarm",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "build",
+    "example",
+    "gh-pages",
+    "lib",
+    "node_modules",
+    "pkg",
+    "src",
+    "test",
+    "tests",
+    "tmp",
+    "vendor",
+    "bower.json",
+    "Gemfile",
+    "gulpfile.ls",
+    "package.json",
+    "Rakefile",
+    "ng-fire-alarm.gemspec"
+  ],
+  "dependencies": {
+    "angular": "~1.2.13",
+    "firebase": "~1.0.3"
+  },
+  "devDependencies": {
+    "angular-ui-bootstrap-bower": "~0.10.0",
+    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#v3.1.0+2"
+  }
+}

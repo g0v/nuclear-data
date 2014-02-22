@@ -4,11 +4,12 @@
 How to run?
 -----------
 
+Install nodejs
+    $ brew install node
+
 Run the following command:
+    
+    $ npm run dev
 
-    $ make run
-    ...
-    Bottle v0.12.4 server starting up (using WSGIRefServer())...
-    Listening on http://localhost:8080/
-    Hit Ctrl-C to quit.
-
+It will start python server and a livereload server on 'static', which will compile gh-pages to 'static'
+    

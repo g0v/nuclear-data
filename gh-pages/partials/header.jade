@@ -1,0 +1,14 @@
+nav.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      button.navbar-toggle(type="button" ng-init="isCollapse = true" ng-click="isCollapse = !isCollapse")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href="/") ng-fire-alarm
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href="#" ng-if="!currentUser" ng-click="auth.login('facebook')") Facebook Login
+          a(href="#" ng-if="currentUser" ng-click="auth.logout()") {{ currentUser.displayName }}
