@@ -48,14 +48,14 @@ angular.module 'demo' <[ checklist-model ]>
     * name: '核三'
       powerset: '2'
 
-  prototype.updateChart = ([query, data, gvis]) ->
+  prototype.updateChart = (dateFilter, [query, data, gvis]) ->
     const aec-data = [['Time'] ++ query.plants.map -> "#{ it.name }##{ it.powerset }"]
     const tai-data = [['Time'] ++ query.plants.map -> "#{ it.name }##{ it.powerset }"]
 
-    data.forEach !->
+    data.forEach !~>
       time = new Date 1970,0,0,0,0,0
         ..setSeconds it.t
-      time = time.toString!
+      time = dateFilter time, 'hh:mm:ss'
       aec-data.push [time] ++ it.powersets.map (.aec)
       tai-data.push [time] ++ it.powersets.map (.tai)
 
@@ -78,9 +78,10 @@ angular.module 'demo' <[ checklist-model ]>
         vAxis: vAxis
 
 
-  LineChartFormCtrl.$inject = <[ $scope  $q  API  GChart ]>
+  LineChartFormCtrl.$inject = <[ $scope  $filter  $q  API  GChart ]>
 
-  !function LineChartFormCtrl ($scope, $q, API, GChart)
+  !function LineChartFormCtrl ($scope, $filter, $q, API, GChart)
+
     $scope.query = do
       plants: @plants[0 til 2]
       startAt: 0
@@ -91,7 +92,7 @@ angular.module 'demo' <[ checklist-model ]>
         angular.copy it
         API.intervalData it
         GChart
-      ] .then @updateChart
+      ] .then angular.bind @, @updateChart, $filter 'date'
 
     , true
 
