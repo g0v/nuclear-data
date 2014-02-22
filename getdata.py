@@ -45,7 +45,7 @@ CREATE TABLE nuclear
         ''')
         conn.commit()
 
-def mainloop(db_path):
+def mainloop(db_path, interval):
     with sqlite3.connect(db_path) as conn:
 
         while True:
@@ -91,12 +91,12 @@ def mainloop(db_path):
 #           print entry
             print '=='
 
-            time.sleep(300)
+            time.sleep(float(interval))
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         setup(sys.argv[1])
-        mainloop(sys.argv[1])
+        mainloop(sys.argv[1], sys.argv[2])
     else:
-        print 'Usage: %s <db-file>' % (sys.argv[0])
+        print 'Usage: %s <db-file> <interval-secs>' % (sys.argv[0])
 
