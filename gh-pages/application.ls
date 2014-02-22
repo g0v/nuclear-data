@@ -16,4 +16,18 @@ google.setOnLoadCallback !->
 
 
 angular.module 'demo' <[]>
-
+.factory 'API', <[
+       $http 
+]> ++ ($http) ->
+  intervalData: (start, end) ->
+    $http(
+      url: ''
+      method: 'get'
+      cache: true
+    ).then (response) ->
+      console.log response
+.controller 'MainCtrl', <[
+       $scope
+       API 
+]> ++ ($scope, API) ->
+   
