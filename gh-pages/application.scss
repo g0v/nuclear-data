@@ -16,6 +16,23 @@ footer {
   }
 }
 
+.pagination {
+  margin-top: 30px;
+  list-style: none;
+  li {
+    display: inline-block;
+    .btn {
+      border: 1px solid #000;
+    }
+  }
+}
+
+.wrapper {
+  @include box-sizing(border-box);
+  padding: 3em;
+  padding-top: 0;
+}
+
 .bar {
   display: inline-block;
   margin-right: 2px;
@@ -27,14 +44,19 @@ footer {
 .month{
     clear:both;
     display:inline-block;
+    margin-right: 20px;
 }
 .day{
 /*            display:inline-block;*/
-    float:left;
-    width:20px;
-    height:20px;
-    margin-left: 3px;
-    
+  float:left;
+  width:20px;
+  height:20px;
+  margin-left: 3px;
+  text-align: center;
+  p {
+    margin: 0;
+    padding: 0;
+  }
 }
 div.week-Sun{
     clear:both;

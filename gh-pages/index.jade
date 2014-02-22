@@ -23,7 +23,18 @@ html(ng-app="demo")
 
           //- div(style="display:inline-block;")
             //- select(ng-repeat="type in types" ng-model="filter.type")
-        
-        .wrapper(generate-cal)
+        #cal-wrapper(ng-controller="CalenderCtrl")
+          ul.pagination
+            li
+              a.btn(ng-click="calYear=2010") 2010
+            li
+              a.btn(ng-click="calYear=2011") 2011
+            li
+              a.btn(ng-click="calYear=2012") 2012
+            li
+              a.btn(ng-click="calYear=2013") 2013
+            li
+              a.btn(ng-click="calYear=2014") 2014
+          .wrapper(ng-init="calYear=2013" generate-cal data-year="{{calYear}}")
 
     include partials/footer
