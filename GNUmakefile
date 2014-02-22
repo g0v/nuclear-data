@@ -74,4 +74,9 @@ python-%: $(RUNTIME_DIR)/bin/python
 .PHONY: nuclear-runtime
 nuclear-runtime: python-bottle
 
+.PHONY: run
+run: nuclear-runtime
+	( source $(RUNTIME_DIR)/bin/activate; \
+	  python nuclear-server.py; deactivate; );
+
 
