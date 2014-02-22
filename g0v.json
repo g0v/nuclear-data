@@ -2,9 +2,9 @@
   "author": "",
   "status": "planning",
   "name": "nuclear-data",
-  "description": "",
+  "description": "Nuclear translate & Watch",
   "description_zh": "將原能會轉譯成容易理解的圖表",
-  "homepage": "",
+  "homepage": "https://g0v.hackpad.com/-Nuclear-Data-8sYMW30othK",
   "document": "https://g0v.hackpad.com/-Nuclear-Data-8sYMW30othK",
   "repository": {
     "type": "git",
