@@ -10,7 +10,6 @@ require! {
   'gulp-exec'
   'gulp-conventional-changelog'
   'gulp-jade'
-  'gulp-ruby-sass'
   'gulp-concat'
   'gulp-livereload'
   'tiny-lr'
@@ -29,9 +28,7 @@ gulp.task 'dev:html' ->
 
 gulp.task 'dev:css' ->
   return gulp.src 'gh-pages/application.scss'
-    .pipe gulp-ruby-sass do
-      loadPath: <[ bower_components/bootstrap-sass/vendor/assets/stylesheets ]>
-      cacheLocation: 'tmp/.sass-cache'
+    .pipe gulp-exec('compass compile --force')
     .pipe gulp.dest 'static'
     .pipe gulp-livereload(livereload)
 
@@ -59,10 +56,7 @@ gulp.task 'public:html' ->
 
 gulp.task 'public:css' ->
   return gulp.src 'gh-pages/application.scss'
-    .pipe gulp-ruby-sass do
-      loadPath: <[ bower_components/bootstrap-sass/vendor/assets/stylesheets ]>
-      cacheLocation: 'tmp/.sass-cache'
-      style: 'compressed'
+    .pipe gulp-exec('compass compile --output-style compressed --force')
     .pipe gulp.dest 'static'
 
 gulp.task 'public:ls' ->
