@@ -39,8 +39,7 @@
     "ng-fire-alarm.gemspec"
   ],
   "dependencies": {
-    "angular": "~1.2.13",
-    "firebase": "~1.0.3"
+    "angular": "~1.2.13"
   },
   "devDependencies": {
     "angular-ui-bootstrap-bower": "~0.10.0",

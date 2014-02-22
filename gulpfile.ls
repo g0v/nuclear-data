@@ -29,7 +29,6 @@ gulp.task 'dev:html' ->
 gulp.task 'dev:css' ->
   return gulp.src 'gh-pages/application.scss'
     .pipe gulp-exec('compass compile --force')
-    .pipe gulp.dest 'static'
     .pipe gulp-livereload(livereload)
 
 gulp.task 'dev:ls' ->
@@ -57,7 +56,6 @@ gulp.task 'public:html' ->
 gulp.task 'public:css' ->
   return gulp.src 'gh-pages/application.scss'
     .pipe gulp-exec('compass compile --output-style compressed --force')
-    .pipe gulp.dest 'static'
 
 gulp.task 'public:ls' ->
   return gulp.src 'gh-pages/application.ls'
