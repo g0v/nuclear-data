@@ -1,14 +1,8 @@
 from bottle import route, static_file, run, response
-
+from nuclear_utils import *
 import sqlite3
 
 db_path = 'data/nuclear.db'
-
-# http://stackoverflow.com/questions/6999726/python-getting-millis-since-epoch-from-datetime/11111177#11111177
-def unix_time(dt):
-    epoch = datetime.datetime.utcfromtimestamp(0)
-    delta = dt - epoch
-    return int(delta.total_seconds())
 
 @route('/static/<filename:path>')
 def send_static(filename):

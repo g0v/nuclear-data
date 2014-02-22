@@ -3,12 +3,7 @@ import subprocess
 import logging, logging.handlers
 import simplejson
 import sqlite3
-
-# http://stackoverflow.com/questions/6999726/python-getting-millis-since-epoch-from-datetime/11111177#11111177
-def unix_time(dt):
-    epoch = datetime.datetime.utcfromtimestamp(0)
-    delta = dt - epoch
-    return int(delta.total_seconds())
+from nuclear_utils import *
 
 def runcmd(cmds, cwd=None, wait=True):
     _PIPE = subprocess.PIPE
