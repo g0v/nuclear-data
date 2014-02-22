@@ -91,7 +91,7 @@ def mainloop(db_path):
 #           print entry
             print '=='
 
-            time.sleep(2)
+            time.sleep(300)
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
