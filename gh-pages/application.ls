@@ -1,45 +1,91 @@
 google.load 'visualization', '1.0', 'packages': <[ corechart ]>
-google.setOnLoadCallback !->
-  const data = google.visualization.arrayToDataTable [
-    <[ Year Sales Expenses ]>
-    ['2004' 1000 400]
-    ['2005' 1170 460]
-    ['2006' 660 1120]
-    ['2007' 1030 540]
-  ]
 
-  const options = do
-    title: 'Company Perf'
+angular.module 'demo' <[ checklist-model ]>
+.factory 'GChart' <[
+       $q
+]> ++ ($q) ->
 
-  const chart = new google.visualization.LineChart document.getElementById 'sample-chart'
-  chart.draw data, options
+  const defer = $q.defer!
+  
+  
+  google.setOnLoadCallback !-> defer.resolve google.visualization
 
+  defer.promise
 
-angular.module 'demo' <[]>
 .factory 'API', <[
-       $http 
-]> ++ ($http) ->
-  intervalData: (start, end) ->
-    $http(
-      url: ''
-      method: 'get'
-      cache: true
-    ).then (response) ->
-      console.log response
+       $http  $q 
+]> ++ ($http, $q) ->
+  const mock = { 'data': [ {'t': 1393082562, 'powersets': [
+    {'planet': '\u6838\u4e00', 'aec': 656.0, 'capacity': 636.0, 'powerset': '1', 'tai': 627.5}, {'planet': '\u6838\u4e00', 'aec': 636.0, 'capacity': 636.0, 'powerset': '2', 'tai': 597.7}, {'planet': '\u6838\u4e8c', 'aec': 1028.0, 'capacity': 985.0, 'powerset': '1', 'tai': 993.3}, {'planet': '\u6838\u4e8c', 'aec': 693.0, 'capacity': 985.0, 'powerset': '2', 'tai': 664.9}, {'planet': '\u6838\u4e09', 'aec': 980.0, 'capacity': 951.0, 'powerset': '1', 'tai': 941.5}, {'planet': '\u6838\u4e09', 'aec': 976.0, 'capacity': 951.0, 'powerset': '2', 'tai': 938.1}]}, ... ] }
+
+  intervalData: (query) ->
+    query = angular.copy query || {}
+    # $http(
+    #   url: ''
+    #   method: 'get'
+    #   cache: true
+    # ).then (response) ->
+    #   console.log response
+
+    $q.when data: mock .then ({data}) ->
+      angular.copy data .data.map ->
+        it.powersets.= filter (powerset) ->
+          const [plant] = query.plants.filter -> it.name is powerset.planet and it.powerset is powerset.powerset
+          !!plant
+          
+        it
+
 
 .controller 'LineChartFormCtrl' do ->
 
   const prototype = LineChartFormCtrl::
 
-  prototype.plants =
+  prototype.plants = 
     * name: '核一'
+      powerset: '1'
+    * name: '核一'
+      powerset: '2'
     * name: '核二'
+      powerset: '1'
+    * name: '核二'
+      powerset: '2'
     * name: '核三'
+      powerset: '1'
+    * name: '核三'
+      powerset: '2'
 
-  LineChartFormCtrl.$inject = <[ $scope  API ]>
+  prototype.updateChart = ([query, data, gvis]) ->
+    const aec-data = [['Time'] ++ query.plants.map -> "#{ it.name }##{ it.powerset }"]
+    const tai-data = [['Time'] ++ query.plants.map -> "#{ it.name }##{ it.powerset }"]
 
-  !function LineChartFormCtrl ($scope, API)
-    void
+    data.forEach !->
+      aec-data.push [it.t] ++ it.powersets.map (.aec)
+      tai-data.push [it.t] ++ it.powersets.map (.tai)
+
+    new gvis.LineChart document.getElementById 'aec-chart'
+      ..draw gvis.arrayToDataTable(aec-data), do
+        title: '原能會'
+        hAxis:
+          direction: -1
+
+    new gvis.LineChart document.getElementById 'tai-chart'
+      ..draw gvis.arrayToDataTable(tai-data), do
+        title: '台電'
+
+
+  LineChartFormCtrl.$inject = <[ $scope  $q  API  GChart ]>
+
+  !function LineChartFormCtrl ($scope, $q, API, GChart)
+    $scope.query = plants: []
+
+    $scope.$watch 'query' !~>
+      $q.all [
+        angular.copy it
+        API.intervalData it
+        GChart
+      ] .then @updateChart
+
+    , true
 
 .controller 'CalenderCtrl', <[
        $scope 

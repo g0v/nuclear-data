@@ -6,6 +6,7 @@ html(ng-app="demo")
     title Nuclear Data
     meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
     link(rel="stylesheet" href="/static/application.css")
+    script(type="text/javascript")
     script(type="text/javascript" src="//www.google.com/jsapi")
     script(type="text/javascript" src="/static/application.js")
   body
@@ -13,8 +14,11 @@ html(ng-app="demo")
     div#content
       div.container(role="main")
         h1 Nuclear Data Here
-        #sample-chart
-        
+
+        div
+          #aec-chart(style="float: left; width: 50%;")
+
+          #tai-chart(style="float: left; width: 50%;")
 
         form(ng-controller="LineChartFormCtrl as formCtrl")
           div(style="display:inline-block;" ng-repeat="plant in formCtrl.plants")
