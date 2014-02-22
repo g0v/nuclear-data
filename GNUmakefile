@@ -72,7 +72,7 @@ python-%: $(RUNTIME_DIR)/bin/python
 # ----------------------------------------------------------------------------
 
 .PHONY: nuclear-runtime
-nuclear-runtime: python-bottle
+nuclear-runtime: python-bottle python-simplejson
 
 .PHONY: nuclear-init
 nuclear-init:
