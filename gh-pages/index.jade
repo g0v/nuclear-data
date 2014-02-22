@@ -14,5 +14,14 @@ html(ng-app="demo")
       div.container(role="main")
         h1 Nuclear Data Here
         #sample-chart
-    
+        
+
+        form(ng-controller="LineChartFormCtrl as formCtrl")
+          div(style="display:inline-block;" ng-repeat="plant in formCtrl.plants")
+            input(type="checkbox" checklist-model="query.plants" checklist-value="plant")
+            label {{ plant.name }}
+
+          //- div(style="display:inline-block;")
+            //- select(ng-repeat="type in types" ng-model="filter.type")
+
     include partials/footer

@@ -38,8 +38,9 @@ gulp.task 'dev:ls' ->
 
 gulp.task 'dev:js' <[ dev:ls ]> ->
   return gulp.src <[
-    bower_components/angular/angular.min.js
-    bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js
+    bower_components/angular/angular.js
+    bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js
+    bower_components/checklist-model/checklist-model.js
     tmp/application.js
   ]>
     .pipe gulp-concat 'application.js'
@@ -67,6 +68,7 @@ gulp.task 'public:js' <[ public:ls ]> ->
   return gulp.src <[
     bower_components/angular/angular.min.js
     bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js
+    bower_components/checklist-model/checklist-model.js
     tmp/application.js
   ]>
     .pipe gulp-concat 'application.js'

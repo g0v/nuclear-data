@@ -26,8 +26,18 @@ angular.module 'demo' <[]>
       cache: true
     ).then (response) ->
       console.log response
-.controller 'MainCtrl', <[
-       $scope
-       API 
-]> ++ ($scope, API) ->
-   
+
+.controller 'LineChartFormCtrl' do ->
+
+  const prototype = LineChartFormCtrl::
+
+  prototype.plants =
+    * name: '核一'
+    * name: '核二'
+    * name: '核三'
+
+  LineChartFormCtrl.$inject = <[ $scope  API ]>
+
+  !function LineChartFormCtrl ($scope, API)
+    void
+
