@@ -1,3 +1,17 @@
 @import "partials/bootstrap";
+@import "compass";
 
-body { background-color: green; }
+body { background-color: fff; }
+
+#content {
+  margin-top: 50px; 
+}
+
+footer {
+  ul, li {
+    list-style: none;
+  }
+  li {
+    @include inline-block();
+  }
+}
