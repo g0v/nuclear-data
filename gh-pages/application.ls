@@ -41,3 +41,56 @@ angular.module 'demo' <[]>
   !function LineChartFormCtrl ($scope, API)
     void
 
+.controller 'CalenderCtrl', <[
+       $scope 
+]> ++ ($scope) ->
+
+.directive 'generateCal', ->
+  (scope, el, attrs) ->
+    console.log 'cal...'
+    arrDay = [
+      "Sun"
+      "Mon"
+      "Tue"
+      "Wed"
+      "Thu"
+      "Fri"
+      "Sat"
+    ]
+    nextday = (today) ->
+      new Date(today.getTime() + 86400000)
+
+    getweekday = (day) ->
+      arrDay[day.getDay()]
+
+    add_cal = (today, $cal) ->
+      month = today.getMonth() + 1
+      day = today.getDate()
+      weekday = getweekday(today)
+      if day is 1
+        i = 0
+
+        while i < today.getDay()
+          $choose_month($cal, month).append $("<div class=\"day none\">")
+          i++
+      $("<div class=\"day day-" + day + " week-" + weekday + "\">").html("<p>" + day + "</p>").attr("data-date", today.getFullYear() + "-" + month + "-" + day).appendTo $choose_month($cal, month)
+      return
+
+
+    #如果沒有月份，插入月份的div
+    $choose_month = ($cal, month) ->
+      if $(cal).children(".month-" + month).length is 0
+        $month = $("<div class=\"month month-" + month + "\">").html("<h2>" + month + "月</h2>").appendTo($(cal))
+        $month
+      else
+        $(cal).children ".month-" + month
+    
+    $ ->
+      today = new Date("2013-01-01")
+      $cal = $("<div id=\"cal\"></div>").appendTo(".wrapper").append($("<h1>2013年</h1>"))
+      i = 0
+      while i < 365
+        add_cal today, $cal
+        today = nextday(today)
+        i++
+      return
