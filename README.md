@@ -4,14 +4,15 @@
 How to run?
 -----------
 
-Install nodejs
-    $ brew install node
+Install nodejs / ruby
+    $ brew install node ruby
     $ npm install bower -g
+    $ gem install compass
 
-Install dependencies
+Install local dependencies
 
     $ npm install
-    & bower install
+    $ bower install
 
 Run the following command:
     
