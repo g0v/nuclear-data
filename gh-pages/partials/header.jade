@@ -6,8 +6,13 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href="/") ng-fire-alarm
-    .collapse.navbar-collapse
+      a.navbar-brand(href="/") 核電翻譯機
+    .collapse.navbar-collapse(role="navigation")
+      ul.nav.navbar-nav
+        li
+          a(href="#") 資料比較
+        li
+          a(href="#") 核電行事曆
       ul.nav.navbar-nav.navbar-right
         li
           a(href="#" ng-if="!currentUser" ng-click="auth.login('facebook')") Facebook Login
